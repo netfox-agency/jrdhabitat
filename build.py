@@ -1,0 +1,226 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Générateur des landings JRD Habitat.
+
+  templates/<service>.html  ×  2 zones  →  <zone>/<service>/index.html   (8 pages)
+
+Usage :  python3 build.py
+Éditer les templates ou les configs ci-dessous, puis relancer. Les pages
+générées ne s'éditent jamais à la main (elles sont écrasées à chaque build).
+"""
+
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).parent
+
+# ---------------------------------------------------------------- constantes
+# ⚠️ PLACEHOLDERS : remplacer ici puis relancer le build (une seule fois pour les 8 pages).
+PHONE_DISPLAY = "06 00 00 00 00"          # ⚠️ numéro réel de JRD Habitat à demander
+PHONE_TEL = "+33600000000"
+URL_BASE = "https://jrd-habitat.fr"       # proposition de domaine, à valider/acheter
+# Conversions du compte JRD Habitat 365-004-7844 (créées le 2026-08-25)
+ADS_GTAG = "AW-18410008662"
+ADS_CONV_DEVIS = "AW-18410008662/MyGrCPOc3OccENbgycpE"   # « Demande de devis (site) » 200 €
+ADS_CONV_APPEL = "AW-18410008662/SkTQCPmc3OccENbgycpE"   # « Appel depuis le site » 100 €
+
+SERVICES = [
+    "demoussage-toiture",
+    "couverture-renovation",
+    "peinture-ravalement",
+    "elagage",
+]
+
+# ---------------------------------------------------------------- zones
+
+
+def pills(cities, main):
+    out = []
+    for c in cities:
+        cls = "zone zone-main" if c == main else "zone"
+        out.append('<span class="%s">%s</span>' % (cls, c))
+    return "\n      ".join(out)
+
+
+def schema_area(cities):
+    return "[" + ",".join('{"@type":"City","name":"%s"}' % c for c in cities[:14]) + "]"
+
+
+PB_CITIES = [
+    "Bayonne", "Anglet", "Biarritz", "Bidart", "Guéthary", "Saint-Jean-de-Luz",
+    "Ciboure", "Urrugne", "Hendaye", "Ascain", "Saint-Pée-sur-Nivelle", "Sare",
+    "Espelette", "Cambo-les-Bains", "Ustaritz", "Hasparren", "La Bastide-Clairence",
+    "Saint-Palais", "Tarnos", "Ondres", "Capbreton", "Hossegor",
+]
+
+DD_CITIES = [
+    "Périgueux", "Trélissac", "Boulazac", "Coulounieix-Chamiers", "Chancelade",
+    "Saint-Astier", "Marsac-sur-l'Isle", "Bergerac", "Lalinde", "Eymet",
+    "Sarlat-la-Canéda", "Terrasson-Lavilledieu", "Le Bugue", "Montignac",
+    "Ribérac", "Mussidan", "Montpon-Ménestérol", "Neuvic", "Vergt",
+    "Brantôme", "Thiviers", "Excideuil",
+]
+
+ZONES = {
+    "pays-basque": {
+        "ZONE_KEY": "pays_basque",
+        "TITLE_GEO": "au Pays Basque",
+        "CITIES3": "Bayonne · Anglet · Biarritz",
+        "CITIES3_COMMA": "Bayonne, Anglet, Biarritz",
+        "ZONE_ALL": "dans tout le Pays Basque et le sud des Landes",
+        "GEO_LINE": "Bayonne · Anglet · Biarritz · tout le Pays Basque et le sud des Landes",
+        "GEO_REGION": "FR-64",
+        "PLACENAME": "Bayonne",
+        "LAT": "43.4933",
+        "LNG": "-1.4748",
+        "VILLE_PLACEHOLDER": "Bayonne, Anglet, Biarritz…",
+        "VILLES_JS": '["Bayonne","Anglet","Biarritz","Saint-Jean-de-Luz","Hendaye","Bidart","Ustaritz","Cambo-les-Bains","Hasparren","Ciboure","Urrugne","Tarnos","Capbreton"]',
+        # ⚠️ addressLocality supposée (Bayonne) : à confirmer avec l'artisan
+        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","addressLocality":"Bayonne","postalCode":"64100","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
+        "SCHEMA_AREA": schema_area(PB_CITIES),
+        "ZONE_PILLS": pills(PB_CITIES, "Bayonne"),
+        "ZONE_H2": "Bayonne, Biarritz et <em>tout le Pays Basque.</em>",
+        "ZONE_SECTION_LEAD": "Nous intervenons sur la côte comme dans l'intérieur du Pays Basque, ainsi que dans le sud des Landes, de Hendaye à Capbreton.",
+        "FOOTER_GEO": "Bayonne, Anglet, Biarritz et tout le Pays Basque (64)",
+        "TRUST_LOCAL_B": "Présents au Pays Basque",
+        "TRUST_LOCAL_S": "Déplacement rapide, 64 et sud des Landes",
+        "WHY_LEAD": {
+            "demoussage-toiture": "Au Pays Basque, l'air marin, la pluie généreuse et la douceur du climat font pousser mousses et lichens toute l'année. Laissés en place, ils travaillent la toiture de l'intérieur.",
+            "couverture-renovation": "Entre la pluie soutenue, l'air marin et les coups de vent d'ouest, les toitures basques sont mises à l'épreuve toute l'année. Une couverture fatiguée ne prévient pas : elle lâche pendant l'averse.",
+            "peinture-ravalement": "Façades blanches, colombages rouge ou vert, boiseries exposées aux embruns : au Pays Basque, la façade fait la maison. Mais l'air marin et la pluie attaquent peintures et enduits plus vite qu'ailleurs.",
+            "elagage": "Chênes, platanes, pins : au Pays Basque, la végétation pousse vite, et les coups de vent d'automne ne pardonnent ni les branches mortes ni les charpentières trop lourdes au-dessus d'un toit.",
+        },
+        "FAQ_CLIMATE_A": "Le climat basque, doux et très arrosé, accélère nettement la pousse des mousses et des lichens, surtout sur les pans exposés au nord ou sous les arbres. Un contrôle tous les deux à trois ans suffit, et un démoussage dès que les tuiles verdissent ou que les gouttières se chargent.",
+        "FAQ_MATERIAL_Q": "Travaillez-vous la tuile canal des maisons basques ?",
+        "FAQ_MATERIAL_A": "Oui. Nous travaillons la tuile canal et la tuile mécanique, majoritaires sur les maisons basques et landaises, ainsi que l'ardoise. Le remplacement se fait à l'identique pour préserver l'aspect de la maison.",
+    },
+    "dordogne": {
+        "ZONE_KEY": "dordogne",
+        "TITLE_GEO": "en Dordogne",
+        "CITIES3": "Périgueux · Bergerac · Sarlat",
+        "CITIES3_COMMA": "Périgueux, Bergerac, Sarlat",
+        "ZONE_ALL": "dans toute la Dordogne",
+        "GEO_LINE": "Périgueux · Bergerac · Sarlat · toute la Dordogne (24)",
+        "GEO_REGION": "FR-24",
+        "PLACENAME": "Périgueux",
+        "LAT": "45.1846",
+        "LNG": "0.7214",
+        "VILLE_PLACEHOLDER": "Périgueux, Bergerac, Sarlat…",
+        "VILLES_JS": '["Périgueux","Bergerac","Sarlat","Trélissac","Boulazac","Chancelade","Saint-Astier","Lalinde","Montignac","Ribérac","Mussidan","Thiviers","Le Bugue"]',
+        # ⚠️ addressLocality supposée (Périgueux) : à confirmer avec l'artisan
+        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","addressLocality":"Périgueux","postalCode":"24000","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
+        "SCHEMA_AREA": schema_area(DD_CITIES),
+        "ZONE_PILLS": pills(DD_CITIES, "Périgueux"),
+        "ZONE_H2": "Périgueux, Bergerac, Sarlat et <em>tout le Périgord.</em>",
+        "ZONE_SECTION_LEAD": "Nous intervenons dans toute la Dordogne, du Périgord blanc au Périgord noir, de Périgueux à Sarlat et de Bergerac à Brantôme.",
+        "FOOTER_GEO": "Périgueux, Bergerac, Sarlat et toute la Dordogne (24)",
+        "TRUST_LOCAL_B": "Présents en Dordogne",
+        "TRUST_LOCAL_S": "Déplacement rapide dans tout le 24",
+        "WHY_LEAD": {
+            "demoussage-toiture": "En Dordogne, l'humidité des vallées de l'Isle, de la Vézère et de la Dordogne, les brouillards d'automne et l'ombre des chênes font prospérer mousses et lichens sur les toitures. Laissés en place, ils travaillent la couverture de l'intérieur.",
+            "couverture-renovation": "Tuile plate, tuile canal, toits pentus du Périgord : les toitures de Dordogne sont belles mais exigeantes. Entre gel d'hiver, orages d'été et humidité des vallées, une couverture fatiguée ne prévient pas : elle lâche pendant l'orage.",
+            "peinture-ravalement": "Pierre blonde, enduits à la chaux, colombages du Bergeracois, volets et boiseries : en Dordogne, la façade fait le charme de la maison. Mais l'humidité, le gel et le soleil d'été attaquent peintures et enduits année après année.",
+            "elagage": "Chênes, noyers, tilleuls : en Dordogne, les arbres font partie de la maison. Mais un houppier trop lourd ou une branche morte au-dessus d'un toit ne pardonnent pas au premier orage.",
+        },
+        "FAQ_CLIMATE_A": "Le Périgord cumule vallées humides, brouillards d'automne et toitures souvent entourées d'arbres : la mousse s'y installe vite, surtout sur les pans nord. Un contrôle tous les deux à trois ans suffit, et un démoussage dès que les tuiles verdissent ou que les gouttières se chargent.",
+        "FAQ_MATERIAL_Q": "Travaillez-vous la tuile plate des toits périgourdins ?",
+        "FAQ_MATERIAL_A": "Oui. Nous travaillons la tuile plate et la tuile canal, typiques des toits périgourdins, ainsi que la tuile mécanique et l'ardoise. Le remplacement se fait à l'identique pour préserver le caractère de la maison.",
+    },
+}
+
+# ---------------------------------------------------------------- preuves
+# ⚠️ NE RIEN INVENTER ICI. Ces trois blocs restent vides tant que JRD n'a pas
+# fourni le vrai matériel. Dès qu'il l'envoie, on remplit et on relance le
+# build : les sections se dévoilent toutes seules sur les 8 pages.
+#
+# Avis : copier le texte EXACT de l'avis Google, prénom et commune réels.
+#   AVIS = [{"texte": "...", "prenom": "Marc", "commune": "Bergerac", "note": 5}, ...]
+AVIS = []
+
+# Prix : deux formules par service. Laisser vide = « Sur devis ».
+#   Repères de marché 2026 pour cadrer la discussion avec lui, À VALIDER :
+#   démoussage 10-30 €/m² · ravalement 30-100 €/m² · réparation toiture
+#   200-3 000 € · élagage 80-1 000 €/arbre.
+PRIX = {}          # {"demoussage-toiture": ("à partir de 12 €/m²", "à partir de 22 €/m²")}
+
+
+def bloc_avis():
+    """Cartes d'avis + attribut hidden + fragment aggregateRating."""
+    if not AVIS:
+        return {
+            "AVIS_HIDDEN": " hidden",
+            "AVIS_CARTES": (
+                '<figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div>'
+                "<blockquote>[ Avis Google à coller mot pour mot ]</blockquote>"
+                "<figcaption>[ Prénom ] · [ Commune ]</figcaption></figure>" * 3),
+            "SCHEMA_RATING": "",
+        }
+    cartes = []
+    for a in AVIS:
+        note = int(a.get("note", 5))
+        cartes.append(
+            '<figure class="review"><div class="stars" aria-label="%d étoiles sur 5">%s</div>'
+            "<blockquote>%s</blockquote><figcaption>%s · %s</figcaption></figure>"
+            % (note, "★" * note, a["texte"], a["prenom"], a["commune"]))
+    moyenne = sum(int(a.get("note", 5)) for a in AVIS) / len(AVIS)
+    return {
+        "AVIS_HIDDEN": "",
+        "AVIS_CARTES": "\n      ".join(cartes),
+        "SCHEMA_RATING": ',"aggregateRating":{"@type":"AggregateRating","ratingValue":"%.1f","reviewCount":"%d"}'
+                         % (moyenne, len(AVIS)),
+    }
+
+
+def bloc_prix(service):
+    a, b = PRIX.get(service, ("", ""))
+    return {"PRIX_A": a or "Sur devis", "PRIX_B": b or "Sur devis"}
+
+# ---------------------------------------------------------------- build
+
+CONSTANTS = {
+    "PHONE_DISPLAY": PHONE_DISPLAY,
+    "PHONE_TEL": PHONE_TEL,
+    "URL_BASE": URL_BASE,
+    "ADS_GTAG": ADS_GTAG,
+    "ADS_CONV_DEVIS": ADS_CONV_DEVIS,
+    "ADS_CONV_APPEL": ADS_CONV_APPEL,
+}
+
+
+def render(template_text, zone_slug, zone, service):
+    tokens = dict(CONSTANTS)
+    tokens["ZONE_SLUG"] = zone_slug
+    tokens.update(bloc_avis())
+    tokens.update(bloc_prix(service))
+    for k, v in zone.items():
+        if k == "WHY_LEAD":
+            tokens["WHY_LEAD"] = v[service]
+        else:
+            tokens[k] = v
+    out = template_text
+    for k, v in tokens.items():
+        out = out.replace("{{%s}}" % k, v)
+    leftover = sorted(set(re.findall(r"\{\{([A-Z0-9_]+)\}\}", out)))
+    if leftover:
+        sys.exit("Jetons non résolus dans %s/%s : %s" % (zone_slug, service, ", ".join(leftover)))
+    return out
+
+
+def main():
+    count = 0
+    for service in SERVICES:
+        tpl = (ROOT / "templates" / (service + ".html")).read_text(encoding="utf-8")
+        for zone_slug, zone in ZONES.items():
+            html = render(tpl, zone_slug, zone, service)
+            dest = ROOT / zone_slug / service / "index.html"
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(html, encoding="utf-8")
+            count += 1
+            print("  %s" % dest.relative_to(ROOT))
+    print("%d pages générées." % count)
+
+
+if __name__ == "__main__":
+    main()
