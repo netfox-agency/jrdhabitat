@@ -18,8 +18,8 @@ ROOT = pathlib.Path(__file__).parent
 
 # ---------------------------------------------------------------- constantes
 # ⚠️ PLACEHOLDERS : remplacer ici puis relancer le build (une seule fois pour les 8 pages).
-PHONE_DISPLAY = "06 00 00 00 00"          # ⚠️ numéro réel de JRD Habitat à demander
-PHONE_TEL = "+33600000000"
+PHONE_DISPLAY = "06 98 29 79 95"      # numéro réel JRD Habitat, fourni le 2026-09-03
+PHONE_TEL = "+33698297995"
 URL_BASE = "https://jrd-habitat.fr"       # proposition de domaine, à valider/acheter
 # Conversions du compte JRD Habitat 365-004-7844 (créées le 2026-08-25)
 ADS_GTAG = "AW-18410008662"
