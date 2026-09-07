@@ -55,6 +55,13 @@ PB_CITIES = [
     "Saint-Palais", "Tarnos", "Ondres", "Capbreton", "Hossegor",
 ]
 
+BX_CITIES = [
+    "Mérignac", "Pessac", "Talence", "Gradignan", "Villenave-d'Ornon",
+    "Le Haillan", "Eysines", "Le Bouscat", "Bègles", "Cestas",
+    "Saint-Médard-en-Jalles", "Bruges", "Blanquefort", "Canéjan",
+    "Léognan", "Martignas-sur-Jalle", "Pian-Médoc", "Saint-Aubin-de-Médoc",
+]
+
 DD_CITIES = [
     "Périgueux", "Trélissac", "Boulazac", "Coulounieix-Chamiers", "Chancelade",
     "Saint-Astier", "Marsac-sur-l'Isle", "Bergerac", "Lalinde", "Eymet",
@@ -95,6 +102,40 @@ ZONES = {
         "FAQ_CLIMATE_A": "Le climat basque, doux et très arrosé, accélère nettement la pousse des mousses et des lichens, surtout sur les pans exposés au nord ou sous les arbres. Un contrôle tous les deux à trois ans suffit, et un démoussage dès que les tuiles verdissent ou que les gouttières se chargent.",
         "FAQ_MATERIAL_Q": "Travaillez-vous la tuile canal des maisons basques ?",
         "FAQ_MATERIAL_A": "Oui. Nous travaillons la tuile canal et la tuile mécanique, majoritaires sur les maisons basques et landaises, ainsi que l'ardoise. Le remplacement se fait à l'identique pour préserver l'aspect de la maison.",
+    },
+    "bordeaux": {
+        "ZONE_KEY": "bordeaux",
+        "TITLE_GEO": "autour de Bordeaux",
+        "CITIES3": "Mérignac · Pessac · Talence",
+        "CITIES3_COMMA": "Mérignac, Pessac, Talence",
+        "ZONE_ALL": "dans l'ouest de la métropole bordelaise",
+        "GEO_LINE": "Mérignac · Pessac · Talence · tout l'ouest de la métropole",
+        "GEO_REGION": "FR-33",
+        "PLACENAME": "Mérignac",
+        # point médian Mérignac / Pessac : le rayon de 15 km couvre toute la
+        # ceinture pavillonnaire ouest sans partir dans le Médoc ni les Landes
+        "LAT": "44.8220",
+        "LNG": "-0.6370",
+        "VILLE_PLACEHOLDER": "Mérignac, Pessac, Talence…",
+        "VILLES_JS": '["Mérignac","Pessac","Talence","Gradignan","Villenave-d\'Ornon","Le Haillan","Eysines","Le Bouscat","Bègles","Cestas","Saint-Médard-en-Jalles","Bruges","Blanquefort","Canéjan","Léognan","Bordeaux"]',
+        # ⚠️ addressLocality supposée (Mérignac) : à confirmer avec l'artisan
+        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","addressLocality":"Mérignac","postalCode":"33700","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
+        "SCHEMA_AREA": schema_area(BX_CITIES),
+        "ZONE_PILLS": pills(BX_CITIES, "Mérignac"),
+        "ZONE_H2": "Mérignac, Pessac et <em>l'ouest de la métropole.</em>",
+        "ZONE_SECTION_LEAD": "Nous intervenons sur la ceinture pavillonnaire à l'ouest de Bordeaux, de Saint-Médard-en-Jalles à Gradignan, en passant par Mérignac, Pessac, Le Haillan et Villenave-d'Ornon.",
+        "FOOTER_GEO": "Mérignac, Pessac, Talence et l'ouest de la métropole bordelaise (33)",
+        "TRUST_LOCAL_B": "Basés dans la métropole",
+        "TRUST_LOCAL_S": "Déplacement rapide, ouest bordelais",
+        "WHY_LEAD": {
+            "demoussage-toiture": "Le climat bordelais, doux et très arrosé d'octobre à mars, fait proliférer mousses et lichens sur les toitures. Sous les pins de la ceinture ouest, l'ombre permanente garde le toit humide toute l'année et accélère encore la pousse.",
+            "couverture-renovation": "Tuile canal des échoppes, ardoise des maisons de maître, toits plats des extensions : la métropole mélange tous les types de couverture. Entre les pluies d'automne et les coups de vent atlantiques, une toiture fatiguée lâche pendant l'averse.",
+            "peinture-ravalement": "Pierre blonde des échoppes, enduits clairs, volets et boiseries : à Bordeaux la façade fait la valeur de la maison. Mais l'humidité océanique noircit les murs et attaque les peintures plus vite qu'ailleurs.",
+            "elagage": "Pins maritimes, chênes et platanes : les jardins de la ceinture ouest sont arborés, et les coups de vent d'automne ne pardonnent ni les branches mortes ni les charpentières trop lourdes au-dessus d'un toit.",
+        },
+        "FAQ_CLIMATE_A": "Le climat océanique bordelais, doux et humide une grande partie de l'année, accélère nettement la pousse des mousses et des lichens, surtout sur les pans nord et sous les pins. Un contrôle tous les deux à trois ans suffit, et un démoussage dès que les tuiles verdissent ou que les gouttières se chargent.",
+        "FAQ_MATERIAL_Q": "Travaillez-vous la tuile canal des échoppes bordelaises ?",
+        "FAQ_MATERIAL_A": "Oui. Nous travaillons la tuile canal, très présente sur les échoppes et les maisons de la métropole, ainsi que la tuile mécanique et l'ardoise. Le remplacement se fait à l'identique pour préserver le caractère de la maison.",
     },
     "dordogne": {
         "ZONE_KEY": "dordogne",
