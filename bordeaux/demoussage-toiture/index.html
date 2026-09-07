@@ -80,8 +80,8 @@ window.ADS_CONVERSION_APPEL = 'AW-18410008662/SkTQCPmc3OccENbgycpE';
 /* Accroche alignée sur la requête : le visiteur doit lire son propre besoin. */
 window.LP_VILLES = ["Mérignac","Pessac","Talence","Gradignan","Villenave-d'Ornon","Le Haillan","Eysines","Le Bouscat","Bègles","Cestas","Saint-Médard-en-Jalles","Bruges","Blanquefort","Canéjan","Léognan","Bordeaux"];
 window.LP_MATCH = {
-  prix:    {h1:"Combien coûte un démoussage <em>de toiture&nbsp;?</em>",
-            sub:"Le prix dépend de la surface, de la pente et de l'état des tuiles. On vient voir, on chiffre, et le devis est gratuit."},
+  prix:    {h1:"Votre prix démoussage, <em>chiffré sous 24&nbsp;h.</em>",
+            sub:"Surface, pente et état des tuiles font le tarif : on passe voir, on mesure, et vous repartez avec un prix ferme. Déplacement et devis gratuits."},
   hydro:   {h1:"Toiture nettoyée, puis <em>protégée par hydrofuge.</em>",
             sub:"Après le démoussage, l'hydrofuge fait perler l'eau et retarde nettement la repousse des mousses."},
   gouttiere:{h1:"Gouttières dégagées et <em>toiture nettoyée.</em>",
@@ -100,12 +100,12 @@ window.LP_MATCH = {
   "url": "https://jrd-habitat.fr/bordeaux/demoussage-toiture/",
   "telephone": "+33698297995",
   "image": "https://jrd-habitat.fr/assets/img/nettoyage-toiture-action.jpg",
-  "priceRange": "€€",
+  "priceRange": "€€","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"3"},
   "currenciesAccepted": "EUR",
   "paymentAccepted": "Chèque, Virement, Carte bancaire, Espèces",
   "slogan": "Votre toiture nettoyée et protégée, sans monter sur le toit.",
   "description": "Démoussage, nettoyage et traitement hydrofuge de toiture à Mérignac, Pessac, Talence et dans l'ouest de la métropole bordelaise. Artisan local, travail garanti, devis gratuit sous 24 h.",
-  "address": {"@type":"PostalAddress","addressLocality":"Mérignac","postalCode":"33700","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"},
+  "address": {"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"},
   "geo": {"@type":"GeoCoordinates","latitude":44.8220,"longitude":-0.6370},
   "openingHoursSpecification": [{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"19:00"}],
   "areaServed": [{"@type":"City","name":"Mérignac"},{"@type":"City","name":"Pessac"},{"@type":"City","name":"Talence"},{"@type":"City","name":"Gradignan"},{"@type":"City","name":"Villenave-d'Ornon"},{"@type":"City","name":"Le Haillan"},{"@type":"City","name":"Eysines"},{"@type":"City","name":"Le Bouscat"},{"@type":"City","name":"Bègles"},{"@type":"City","name":"Cestas"},{"@type":"City","name":"Saint-Médard-en-Jalles"},{"@type":"City","name":"Bruges"},{"@type":"City","name":"Blanquefort"},{"@type":"City","name":"Canéjan"}],
@@ -256,7 +256,7 @@ window.LP_MATCH = {
   <div class="wrap trust-in">
     <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6l-8-3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Artisan assuré</b><span>Entreprise déclarée, travaux couverts</span></span></div>
     <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span><span><b>Devis sous 24 h</b><span>Visite et chiffrage gratuits</span></span></div>
-    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg></span><span><b>Basés dans la métropole</b><span>Déplacement rapide, ouest bordelais</span></span></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg></span><span><b>Nous intervenons sur la métropole</b><span>Devis et déplacement gratuits</span></span></div>
     <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16v12H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 11h16M9 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><b>Paiement après chantier</b><span>Aucun acompte réclamé au devis</span></span></div>
   </div>
 </div>
@@ -389,14 +389,16 @@ window.LP_MATCH = {
      ⚠️ N'INVENTEZ AUCUN AVIS. Collez ici les vrais avis Google du client
      (texte exact + prénom + commune), puis ajoutez aggregateRating au schema.
      Tant que la section n'est pas remplie, laissez-la masquée (hidden). -->
-<section class="section section-raise" id="avis" hidden>
+<section class="section section-raise" id="avis">
   <div class="wrap">
     <div class="sec-head center">
       <span class="eyebrow">Ils nous ont fait confiance</span>
       <h2 class="h2">Ce que disent <em>nos clients.</em></h2>
     </div>
     <div class="reviews">
-      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure><figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure><figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure></div>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Intervention de très bonne qualité : réfection complète d'une toiture. Travail fini et soigné. Le nettoyage des abords a été parfaitement réalisé.</blockquote><figcaption>Jacky P. · avril 2022</figcaption></figure>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Entreprise professionnelle très sérieuse, de qualité, que je recommande.</blockquote><figcaption>Laëtitia A. · janvier 2021</figcaption></figure>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Professionnel, travail très soigné.</blockquote><figcaption>Kigan R. · février 2021</figcaption></figure></div>
   </div>
 </section>
 
@@ -559,6 +561,6 @@ window.LP_MATCH = {
   <a href="#devis" class="quote">Devis gratuit</a>
 </div>
 
-<script src="../../assets/script.js?v=9" defer></script>
+<script src="../../assets/script.js?v=10" defer></script>
 </body>
 </html>

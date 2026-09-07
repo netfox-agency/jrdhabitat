@@ -71,8 +71,8 @@ window.LP_MATCH = {
   urgence: {h1:"Branche dangereuse&nbsp;? <em>On la descend en sécurité.</em>",
             sub:"Branche morte, arbre fragilisé au-dessus du toit : on passe voir et on sécurise sans attendre la bonne saison.",
             urgent:"Branche qui menace ? Appelez, on regarde ça en priorité."},
-  prix:    {h1:"Combien coûte <em>un élagage&nbsp;?</em>",
-            sub:"Hauteur, essence, accès et volume à évacuer font le prix. La visite et le chiffrage sont gratuits."},
+  prix:    {h1:"Votre devis élagage, <em>chiffré sous 24&nbsp;h.</em>",
+            sub:"Hauteur, essence, accès et volume à évacuer font le prix. On passe voir les arbres et vous avez un chiffre ferme. Visite et devis gratuits."},
   toiture: {h1:"Branches au-dessus du toit&nbsp;? <em>On dégage.</em>",
             sub:"Descente en rétention au-dessus de la toiture, gouttières dégagées, végétaux évacués. Jamais de branche lâchée."},
   besoin:  {urgence:"Branches au-dessus du toit ou chez le voisin", prix:"Élagage ou taille d'un arbre",
@@ -89,12 +89,12 @@ window.LP_MATCH = {
   "url": "https://jrd-habitat.fr/bordeaux/elagage/",
   "telephone": "+33698297995",
   "image": "https://jrd-habitat.fr/assets/img/elagueur-en-action.jpg",
-  "priceRange": "€€",
+  "priceRange": "€€","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"3"},
   "currenciesAccepted": "EUR",
   "paymentAccepted": "Chèque, Virement, Carte bancaire, Espèces",
   "slogan": "Vos arbres élagués, votre maison dégagée.",
   "description": "Élagage, taille raisonnée et entretien d'arbres à Mérignac, Pessac, Talence et dans l'ouest de la métropole bordelaise. Intervention en sécurité, végétaux broyés et évacués, devis gratuit sous 24 h.",
-  "address": {"@type":"PostalAddress","addressLocality":"Mérignac","postalCode":"33700","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"},
+  "address": {"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"},
   "geo": {"@type":"GeoCoordinates","latitude":44.8220,"longitude":-0.6370},
   "openingHoursSpecification": [{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"19:00"}],
   "areaServed": [{"@type":"City","name":"Mérignac"},{"@type":"City","name":"Pessac"},{"@type":"City","name":"Talence"},{"@type":"City","name":"Gradignan"},{"@type":"City","name":"Villenave-d'Ornon"},{"@type":"City","name":"Le Haillan"},{"@type":"City","name":"Eysines"},{"@type":"City","name":"Le Bouscat"},{"@type":"City","name":"Bègles"},{"@type":"City","name":"Cestas"},{"@type":"City","name":"Saint-Médard-en-Jalles"},{"@type":"City","name":"Bruges"},{"@type":"City","name":"Blanquefort"},{"@type":"City","name":"Canéjan"}],
@@ -241,7 +241,7 @@ window.LP_MATCH = {
   <div class="wrap trust-in">
     <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 4.5 3.2 7.6 8 9 4.8-1.4 8-4.5 8-9V6l-8-3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><b>Artisan assuré</b><span>Entreprise déclarée, intervention couverte</span></span></div>
     <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span><span><b>Devis sous 24 h</b><span>Visite et chiffrage gratuits</span></span></div>
-    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg></span><span><b>Basés dans la métropole</b><span>Déplacement rapide, ouest bordelais</span></span></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg></span><span><b>Nous intervenons sur la métropole</b><span>Devis et déplacement gratuits</span></span></div>
     <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16v12H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 11h16M9 15h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span><b>Paiement après chantier</b><span>Aucun acompte réclamé au devis</span></span></div>
   </div>
 </div>
@@ -351,14 +351,16 @@ window.LP_MATCH = {
 </section>
 
 <!-- ================= AVIS ================= (masqué tant que vide, ne rien inventer) -->
-<section class="section section-raise" id="avis" hidden>
+<section class="section section-raise" id="avis">
   <div class="wrap">
     <div class="sec-head center">
       <span class="eyebrow">Ils nous ont fait confiance</span>
       <h2 class="h2">Ce que disent <em>nos clients.</em></h2>
     </div>
     <div class="reviews">
-      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure><figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure><figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure></div>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Intervention de très bonne qualité : réfection complète d'une toiture. Travail fini et soigné. Le nettoyage des abords a été parfaitement réalisé.</blockquote><figcaption>Jacky P. · avril 2022</figcaption></figure>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Entreprise professionnelle très sérieuse, de qualité, que je recommande.</blockquote><figcaption>Laëtitia A. · janvier 2021</figcaption></figure>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Professionnel, travail très soigné.</blockquote><figcaption>Kigan R. · février 2021</figcaption></figure></div>
   </div>
 </section>
 
@@ -517,6 +519,6 @@ window.LP_MATCH = {
   <a href="#devis" class="quote">Devis gratuit</a>
 </div>
 
-<script src="../../assets/script.js?v=9" defer></script>
+<script src="../../assets/script.js?v=10" defer></script>
 </body>
 </html>

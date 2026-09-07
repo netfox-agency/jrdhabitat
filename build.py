@@ -84,8 +84,8 @@ ZONES = {
         "LNG": "-1.4748",
         "VILLE_PLACEHOLDER": "Bayonne, Anglet, Biarritz…",
         "VILLES_JS": '["Bayonne","Anglet","Biarritz","Saint-Jean-de-Luz","Hendaye","Bidart","Ustaritz","Cambo-les-Bains","Hasparren","Ciboure","Urrugne","Tarnos","Capbreton"]',
-        # ⚠️ addressLocality supposée (Bayonne) : à confirmer avec l'artisan
-        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","addressLocality":"Bayonne","postalCode":"64100","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
+        # Adresse réelle (fiche Google JRD HABITAT) — identique sur les 3 zones
+        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
         "SCHEMA_AREA": schema_area(PB_CITIES),
         "ZONE_PILLS": pills(PB_CITIES, "Bayonne"),
         "ZONE_H2": "Bayonne, Biarritz et <em>tout le Pays Basque.</em>",
@@ -118,15 +118,15 @@ ZONES = {
         "LNG": "-0.6370",
         "VILLE_PLACEHOLDER": "Mérignac, Pessac, Talence…",
         "VILLES_JS": '["Mérignac","Pessac","Talence","Gradignan","Villenave-d\'Ornon","Le Haillan","Eysines","Le Bouscat","Bègles","Cestas","Saint-Médard-en-Jalles","Bruges","Blanquefort","Canéjan","Léognan","Bordeaux"]',
-        # ⚠️ addressLocality supposée (Mérignac) : à confirmer avec l'artisan
-        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","addressLocality":"Mérignac","postalCode":"33700","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
+        # Adresse réelle (fiche Google JRD HABITAT) — identique sur les 3 zones
+        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
         "SCHEMA_AREA": schema_area(BX_CITIES),
         "ZONE_PILLS": pills(BX_CITIES, "Mérignac"),
         "ZONE_H2": "Mérignac, Pessac et <em>l'ouest de la métropole.</em>",
         "ZONE_SECTION_LEAD": "Nous intervenons sur la ceinture pavillonnaire à l'ouest de Bordeaux, de Saint-Médard-en-Jalles à Gradignan, en passant par Mérignac, Pessac, Le Haillan et Villenave-d'Ornon.",
         "FOOTER_GEO": "Mérignac, Pessac, Talence et l'ouest de la métropole bordelaise (33)",
-        "TRUST_LOCAL_B": "Basés dans la métropole",
-        "TRUST_LOCAL_S": "Déplacement rapide, ouest bordelais",
+        "TRUST_LOCAL_B": "Nous intervenons sur la métropole",
+        "TRUST_LOCAL_S": "Devis et déplacement gratuits",
         "WHY_LEAD": {
             "demoussage-toiture": "Le climat bordelais, doux et très arrosé d'octobre à mars, fait proliférer mousses et lichens sur les toitures. Sous les pins de la ceinture ouest, l'ombre permanente garde le toit humide toute l'année et accélère encore la pousse.",
             "couverture-renovation": "Tuile canal des échoppes, ardoise des maisons de maître, toits plats des extensions : la métropole mélange tous les types de couverture. Entre les pluies d'automne et les coups de vent atlantiques, une toiture fatiguée lâche pendant l'averse.",
@@ -150,8 +150,8 @@ ZONES = {
         "LNG": "0.7214",
         "VILLE_PLACEHOLDER": "Périgueux, Bergerac, Sarlat…",
         "VILLES_JS": '["Périgueux","Bergerac","Sarlat","Trélissac","Boulazac","Chancelade","Saint-Astier","Lalinde","Montignac","Ribérac","Mussidan","Thiviers","Le Bugue"]',
-        # ⚠️ addressLocality supposée (Périgueux) : à confirmer avec l'artisan
-        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","addressLocality":"Périgueux","postalCode":"24000","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
+        # Adresse réelle (fiche Google JRD HABITAT) — identique sur les 3 zones
+        "SCHEMA_ADDRESS": '{"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
         "SCHEMA_AREA": schema_area(DD_CITIES),
         "ZONE_PILLS": pills(DD_CITIES, "Périgueux"),
         "ZONE_H2": "Périgueux, Bergerac, Sarlat et <em>tout le Périgord.</em>",
@@ -178,7 +178,18 @@ ZONES = {
 #
 # Avis : copier le texte EXACT de l'avis Google, prénom et commune réels.
 #   AVIS = [{"texte": "...", "prenom": "Marc", "commune": "Bergerac", "note": 5}, ...]
-AVIS = []
+AVIS = [
+    # Avis Google réels de la fiche JRD HABITAT (5,0 ★ · 3 avis), recopiés mot pour mot.
+    # ⚠️ Ils datent de 2021-2022 et parlent de réfection de toiture, pas de démoussage.
+    # Le premier est tronqué par Google (« … Plus ») : à compléter depuis la fiche.
+    {"prenom": "Jacky P.", "commune": "avril 2022", "note": 5,
+     "texte": "Intervention de très bonne qualité : réfection complète d'une toiture. "
+              "Travail fini et soigné. Le nettoyage des abords a été parfaitement réalisé."},
+    {"prenom": "Laëtitia A.", "commune": "janvier 2021", "note": 5,
+     "texte": "Entreprise professionnelle très sérieuse, de qualité, que je recommande."},
+    {"prenom": "Kigan R.", "commune": "février 2021", "note": 5,
+     "texte": "Professionnel, travail très soigné."},
+]
 
 # Prix : deux formules par service. Laisser vide = « Sur devis ».
 #   Repères de marché 2026 pour cadrer la discussion avec lui, À VALIDER :

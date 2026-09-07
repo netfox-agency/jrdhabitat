@@ -66,8 +66,8 @@ window.ADS_CONVERSION = 'AW-18410008662/MyGrCPOc3OccENbgycpE';
 window.ADS_CONVERSION_APPEL = 'AW-18410008662/SkTQCPmc3OccENbgycpE';
 window.LP_VILLES = ["Périgueux","Bergerac","Sarlat","Trélissac","Boulazac","Chancelade","Saint-Astier","Lalinde","Montignac","Ribérac","Mussidan","Thiviers","Le Bugue"];
 window.LP_MATCH = {
-  prix:    {h1:"Combien coûte un ravalement <em>de façade&nbsp;?</em>",
-            sub:"L'état du support fait presque tout le budget. On vient voir la façade et on chiffre poste par poste, gratuitement."},
+  prix:    {h1:"Votre devis façade, <em>chiffré sous 24&nbsp;h.</em>",
+            sub:"L'état du support fait presque tout le budget. On vient voir la façade, on chiffre poste par poste, et le prix ne bouge plus. Déplacement gratuit."},
   nettoyage:{h1:"Façade nettoyée, <em>traces vertes effacées.</em>",
             sub:"Nettoyage adapté au support, sans décaper l'enduit, puis traitement anti-mousse. Bien moins cher qu'un ravalement."},
   boiserie:{h1:"Volets, colombages et boiseries <em>remis en couleur.</em>",
@@ -86,12 +86,12 @@ window.LP_MATCH = {
   "url": "https://jrd-habitat.fr/dordogne/peinture-ravalement/",
   "telephone": "+33698297995",
   "image": "https://jrd-habitat.fr/assets/img/peinture-volet-bois.jpg",
-  "priceRange": "€€",
+  "priceRange": "€€","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"3"},
   "currenciesAccepted": "EUR",
   "paymentAccepted": "Chèque, Virement, Carte bancaire, Espèces",
   "slogan": "Votre façade ravivée, votre maison transformée.",
   "description": "Ravalement de façade, peinture extérieure, boiseries, murettes et colombages à Périgueux, Bergerac, Sarlat et dans toute la Dordogne. Artisan local, devis gratuit sous 24 h.",
-  "address": {"@type":"PostalAddress","addressLocality":"Périgueux","postalCode":"24000","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"},
+  "address": {"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"},
   "geo": {"@type":"GeoCoordinates","latitude":45.1846,"longitude":0.7214},
   "openingHoursSpecification": [{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"19:00"}],
   "areaServed": [{"@type":"City","name":"Périgueux"},{"@type":"City","name":"Trélissac"},{"@type":"City","name":"Boulazac"},{"@type":"City","name":"Coulounieix-Chamiers"},{"@type":"City","name":"Chancelade"},{"@type":"City","name":"Saint-Astier"},{"@type":"City","name":"Marsac-sur-l'Isle"},{"@type":"City","name":"Bergerac"},{"@type":"City","name":"Lalinde"},{"@type":"City","name":"Eymet"},{"@type":"City","name":"Sarlat-la-Canéda"},{"@type":"City","name":"Terrasson-Lavilledieu"},{"@type":"City","name":"Le Bugue"},{"@type":"City","name":"Montignac"}],
@@ -369,14 +369,16 @@ window.LP_MATCH = {
 </section>
 
 <!-- ================= AVIS ================= (masqué tant que vide, ne rien inventer) -->
-<section class="section section-raise" id="avis" hidden>
+<section class="section section-raise" id="avis">
   <div class="wrap">
     <div class="sec-head center">
       <span class="eyebrow">Ils nous ont fait confiance</span>
       <h2 class="h2">Ce que disent <em>nos clients.</em></h2>
     </div>
     <div class="reviews">
-      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure><figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure><figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>[ Avis Google à coller mot pour mot ]</blockquote><figcaption>[ Prénom ] · [ Commune ]</figcaption></figure></div>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Intervention de très bonne qualité : réfection complète d'une toiture. Travail fini et soigné. Le nettoyage des abords a été parfaitement réalisé.</blockquote><figcaption>Jacky P. · avril 2022</figcaption></figure>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Entreprise professionnelle très sérieuse, de qualité, que je recommande.</blockquote><figcaption>Laëtitia A. · janvier 2021</figcaption></figure>
+      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Professionnel, travail très soigné.</blockquote><figcaption>Kigan R. · février 2021</figcaption></figure></div>
   </div>
 </section>
 
@@ -540,6 +542,6 @@ window.LP_MATCH = {
   <a href="#devis" class="quote">Devis gratuit</a>
 </div>
 
-<script src="../../assets/script.js?v=9" defer></script>
+<script src="../../assets/script.js?v=10" defer></script>
 </body>
 </html>
