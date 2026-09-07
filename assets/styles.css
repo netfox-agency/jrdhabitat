@@ -479,3 +479,34 @@ a.fc:hover{transform:translateY(-2px);box-shadow:var(--shadow-hi),inset 0 0 0 1p
   html{scroll-behavior:auto}
   *{transition-duration:.01ms !important;animation-duration:.01ms !important}
 }
+
+/* ---------- Bandeau de consentement ----------
+   Obligatoire dès lors qu'on dépose un cookie publicitaire (_gcl_aw).
+   Posé au-dessus de la barre d'appel pour ne jamais masquer le CTA principal :
+   le visiteur peut appeler sans avoir à répondre d'abord. Refuser est aussi
+   simple qu'accepter, comme l'exige la CNIL. */
+.cookiebar{
+  position:fixed;left:12px;right:12px;bottom:12px;z-index:70;
+  display:none;gap:14px;align-items:center;flex-wrap:wrap;
+  padding:15px 17px;border-radius:var(--r-md);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:inset 0 0 0 1px var(--line),0 14px 40px rgba(27,42,33,.24);
+}
+.cookiebar.is-open{display:flex}
+.cookiebar p{flex:1 1 260px;margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-80)}
+.cookiebar .cookiebar-acts{display:flex;gap:9px;flex:0 0 auto}
+.cookiebar button{
+  padding:11px 17px;border:0;border-radius:calc(var(--r-md) - 4px);
+  font:inherit;font-weight:700;font-size:14px;cursor:pointer;
+}
+.cookiebar .refuse{background:var(--paper-2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.cookiebar .accept{background:linear-gradient(165deg,#3A7052,#26523B);color:#fff}
+.cookiebar .refuse:hover{background:#E3DDCD}
+/* Quand le bandeau est ouvert, la barre d'appel descend sous lui. */
+body.has-cookiebar .callbar{bottom:calc(12px + var(--consent-h,84px))}
+@media (max-width:560px){
+  .cookiebar{padding:14px}
+  .cookiebar .cookiebar-acts{flex:1 1 100%}
+  .cookiebar button{flex:1}
+}

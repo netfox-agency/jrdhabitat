@@ -51,7 +51,39 @@
       window.gtag('event', 'conversion', { send_to: id });
     }
   }
-  function reportConversion(type) {
+  /* Conversions améliorées : gtag hache lui-même le téléphone et le nom avant
+     de les envoyer (rien de lisible ne quitte le navigateur). Ça rattrape les
+     conversions que Safari/iOS font perdre, majoritaires sur ce trafic mobile. */
+  function telE164(v) {
+    var n = (v || '').replace(/[^0-9+]/g, '');
+    if (n.indexOf('+') === 0) return n;
+    if (n.indexOf('00') === 0) return '+' + n.slice(2);
+    if (n.indexOf('0') === 0 && n.length === 10) return '+33' + n.slice(1);
+    return n ? '+33' + n : '';
+  }
+  /* Lu AVANT l'envoi : form.reset() vide les champs, et la conversion part
+     après. Si on relisait le formulaire à ce moment-là, on n'enverrait rien. */
+  function lireIdentite(form) {
+    if (!form) return null;
+    return {
+      tel: telE164((form.querySelector('[name=tel]') || {}).value),
+      nom: ((form.querySelector('[name=nom]') || {}).value || '').trim()
+    };
+  }
+  function setUserData(ident) {
+    if (typeof window.gtag !== 'function' || !ident) return;
+    var tel = ident.tel, nom = ident.nom;
+    if (!tel && !nom) return;
+    var ud = {};
+    if (tel) ud.phone_number = tel;
+    if (nom) {
+      var bouts = nom.split(/\s+/);
+      ud.address = { first_name: bouts[0], last_name: bouts.slice(1).join(' ') || bouts[0] };
+    }
+    window.gtag('set', 'user_data', ud);
+  }
+  function reportConversion(type, ident) {
+    setUserData(ident);
     sendTo(window.ADS_CONVERSION || '');
     dl.push({ event: type, form_location: LP });
   }
@@ -98,6 +130,7 @@
       data.append('from_name', 'JRD Habitat · landing ' + LP);
       data.append('formulaire', form.id === 'devis-form' ? 'haut de page' : 'bas de page');
 
+      var ident = lireIdentite(form);
       btn.disabled = true;
       var label = btn.textContent;
       btn.textContent = 'Envoi en cours…';
@@ -109,7 +142,7 @@
             form.reset();
             form.classList.add('is-sent');
             success.style.display = 'block';
-            reportConversion('generate_lead');
+            reportConversion('generate_lead', ident);
             success.scrollIntoView({ block: 'center', behavior: 'smooth' });
           } else {
             error.style.display = 'block';
@@ -211,4 +244,62 @@
   /* ---------- 5. Année ---------- */
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
+
+
+  /* ---------- 8. Bandeau de consentement (Consent Mode v2) ----------
+     Le choix est mémorisé ; tant qu'il n'est pas fait, Google reste en mode
+     refusé et modélise. Le bandeau ne masque jamais la barre d'appel. */
+  (function () {
+    var memo = null;
+    try { memo = localStorage.getItem('jrd_consent'); } catch (e) {}
+    if (memo === 'granted' || memo === 'denied') return;
+
+    var el = document.createElement('div');
+    el.className = 'cookiebar';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-label', 'Gestion des cookies');
+    el.innerHTML =
+      '<p>On utilise un cookie de mesure pour savoir quelles annonces amènent ' +
+      'de vraies demandes. Rien de plus, et vous pouvez refuser.</p>' +
+      '<div class="cookiebar-acts">' +
+      '<button type="button" class="refuse">Refuser</button>' +
+      '<button type="button" class="accept">Accepter</button>' +
+      '</div>';
+    document.body.appendChild(el);
+
+    /* La hauteur doit être relue APRÈS le rendu des polices, sinon la barre
+       d'appel remonte trop peu et le bandeau la recouvre. ResizeObserver suit
+       la valeur réelle en continu ; le timer couvre les navigateurs sans. */
+    function place() {
+      document.documentElement.style.setProperty('--consent-h', (el.offsetHeight + 8) + 'px');
+    }
+    /* Surtout pas de requestAnimationFrame ici : dans un onglet ouvert en
+       arrière-plan il ne se déclenche pas, et le bandeau ne s'afficherait
+       jamais — donc aucun consentement possible, donc aucune conversion. */
+    el.classList.add('is-open');
+    document.body.classList.add('has-cookiebar');
+    place();
+    if (window.ResizeObserver) { new ResizeObserver(place).observe(el); }
+    setTimeout(place, 250);
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(place); }
+    window.addEventListener('resize', place);
+
+    function choisir(ok) {
+      try { localStorage.setItem('jrd_consent', ok ? 'granted' : 'denied'); } catch (e) {}
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          ad_storage: ok ? 'granted' : 'denied',
+          ad_user_data: ok ? 'granted' : 'denied',
+          ad_personalization: ok ? 'granted' : 'denied',
+          analytics_storage: ok ? 'granted' : 'denied'
+        });
+      }
+      el.classList.remove('is-open');
+      document.body.classList.remove('has-cookiebar');
+      setTimeout(function () { el.remove(); }, 60);
+    }
+    el.querySelector('.accept').addEventListener('click', function () { choisir(true); });
+    el.querySelector('.refuse').addEventListener('click', function () { choisir(false); });
+  })();
+
 })();

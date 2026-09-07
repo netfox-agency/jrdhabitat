@@ -28,18 +28,39 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" />
-<link rel="stylesheet" href="../../assets/styles.css?v=4" />
+<link rel="stylesheet" href="../../assets/styles.css?v=7" />
 
 <script>
 window.ADS_GTAG = '{{ADS_GTAG}}';
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+/* Consent Mode v2 — obligatoire dans l'UE.
+   Tout est refusé par défaut ; la bannière (script.js) débloque. Sans Consent
+   Mode, Google n'a pas le droit de modéliser les conversions des visiteurs qui
+   refusent : on les perd sèchement. Avec, il les estime. wait_for_update laisse
+   500 ms au choix déjà mémorisé pour arriver avant le premier tag. */
+var _consentJRD = null;
+try { _consentJRD = localStorage.getItem('jrd_consent'); } catch (e) {}
+gtag('consent', 'default', {
+  ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+  analytics_storage: 'denied', wait_for_update: 500
+});
+if (_consentJRD === 'granted') {
+  gtag('consent', 'update', {
+    ad_storage: 'granted', ad_user_data: 'granted',
+    ad_personalization: 'granted', analytics_storage: 'granted'
+  });
+}
+gtag('set', 'ads_data_redaction', true);
+gtag('set', 'url_passthrough', true);
 if (window.ADS_GTAG.indexOf('XXXX') === -1) {
   var s = document.createElement('script'); s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.ADS_GTAG;
   document.head.appendChild(s);
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', window.ADS_GTAG);
+  /* allow_enhanced_conversions : le téléphone haché est renvoyé avec la
+     conversion, ce qui rattrape celles que Safari/iOS font perdre. */
+  gtag('config', window.ADS_GTAG, { allow_enhanced_conversions: true });
 }
 window.ADS_CONVERSION = '{{ADS_CONV_DEVIS}}';
 window.ADS_CONVERSION_APPEL = '{{ADS_CONV_APPEL}}';
@@ -498,6 +519,6 @@ window.LP_MATCH = {
   <a href="#devis" class="quote">Devis gratuit</a>
 </div>
 
-<script src="../../assets/script.js?v=4" defer></script>
+<script src="../../assets/script.js?v=9" defer></script>
 </body>
 </html>
