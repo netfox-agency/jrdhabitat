@@ -63,11 +63,13 @@ BX_CITIES = [
 ]
 
 DD_CITIES = [
-    "Périgueux", "Trélissac", "Boulazac", "Coulounieix-Chamiers", "Chancelade",
-    "Saint-Astier", "Marsac-sur-l'Isle", "Bergerac", "Lalinde", "Eymet",
-    "Sarlat-la-Canéda", "Terrasson-Lavilledieu", "Le Bugue", "Montignac",
-    "Ribérac", "Mussidan", "Montpon-Ménestérol", "Neuvic", "Vergt",
-    "Brantôme", "Thiviers", "Excideuil",
+    # Bergeracois d'abord : c'est là qu'il est installé (Gardonne, 24680).
+    "Bergerac", "Gardonne", "Prigonrieux", "La Force", "Lamonzie-Saint-Martin",
+    "Le Fleix", "Sainte-Foy-la-Grande", "Sigoulès", "Monbazillac", "Creysse",
+    "Mouleydier", "Lalinde", "Eymet", "Issigeac",
+    # Reste du département, couvert par la campagne.
+    "Périgueux", "Trélissac", "Sarlat-la-Canéda", "Mussidan", "Montpon-Ménestérol",
+    "Ribérac", "Le Bugue", "Saint-Astier",
 ]
 
 ZONES = {
@@ -140,25 +142,25 @@ ZONES = {
     "dordogne": {
         "ZONE_KEY": "dordogne",
         "TITLE_GEO": "en Dordogne",
-        "CITIES3": "Périgueux · Bergerac · Sarlat",
-        "CITIES3_COMMA": "Périgueux, Bergerac, Sarlat",
+        "CITIES3": "Bergerac · Sainte-Foy · Périgueux",
+        "CITIES3_COMMA": "Bergerac, Sainte-Foy-la-Grande, Périgueux",
         "ZONE_ALL": "dans toute la Dordogne",
-        "GEO_LINE": "Périgueux · Bergerac · Sarlat · toute la Dordogne (24)",
+        "GEO_LINE": "Bergerac · Sainte-Foy · Lalinde · toute la Dordogne (24)",
         "GEO_REGION": "FR-24",
-        "PLACENAME": "Périgueux",
-        "LAT": "45.1846",
-        "LNG": "0.7214",
-        "VILLE_PLACEHOLDER": "Périgueux, Bergerac, Sarlat…",
-        "VILLES_JS": '["Périgueux","Bergerac","Sarlat","Trélissac","Boulazac","Chancelade","Saint-Astier","Lalinde","Montignac","Ribérac","Mussidan","Thiviers","Le Bugue"]',
+        "PLACENAME": "Bergerac",
+        "LAT": "44.8358",
+        "LNG": "0.3486",
+        "VILLE_PLACEHOLDER": "Bergerac, Sainte-Foy, Lalinde…",
+        "VILLES_JS": '["Bergerac","Gardonne","Prigonrieux","La Force","Lamonzie-Saint-Martin","Le Fleix","Sainte-Foy-la-Grande","Sigoulès","Creysse","Mouleydier","Lalinde","Eymet","Issigeac","Périgueux","Sarlat","Mussidan","Montpon-Ménestérol","Ribérac"]',
         # Adresse réelle (fiche Google JRD HABITAT) — identique sur les 3 zones
         "SCHEMA_ADDRESS": '{"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"}',
         "SCHEMA_AREA": schema_area(DD_CITIES),
-        "ZONE_PILLS": pills(DD_CITIES, "Périgueux"),
-        "ZONE_H2": "Périgueux, Bergerac, Sarlat et <em>tout le Périgord.</em>",
+        "ZONE_PILLS": pills(DD_CITIES, "Bergerac"),
+        "ZONE_H2": "Bergerac, le Bergeracois et <em>toute la Dordogne.</em>",
         "ZONE_SECTION_LEAD": "Nous intervenons dans toute la Dordogne, du Périgord blanc au Périgord noir, de Périgueux à Sarlat et de Bergerac à Brantôme.",
-        "FOOTER_GEO": "Périgueux, Bergerac, Sarlat et toute la Dordogne (24)",
-        "TRUST_LOCAL_B": "Présents en Dordogne",
-        "TRUST_LOCAL_S": "Déplacement rapide dans tout le 24",
+        "FOOTER_GEO": "Bergerac, Sainte-Foy-la-Grande, Périgueux et toute la Dordogne (24)",
+        "TRUST_LOCAL_B": "Installés en Dordogne",
+        "TRUST_LOCAL_S": "Basés dans le Bergeracois, on couvre le 24",
         "WHY_LEAD": {
             "demoussage-toiture": "En Dordogne, l'humidité des vallées de l'Isle, de la Vézère et de la Dordogne, les brouillards d'automne et l'ombre des chênes font prospérer mousses et lichens sur les toitures. Laissés en place, ils travaillent la couverture de l'intérieur.",
             "couverture-renovation": "Tuile plate, tuile canal, toits pentus du Périgord : les toitures de Dordogne sont belles mais exigeantes. Entre gel d'hiver, orages d'été et humidité des vallées, une couverture fatiguée ne prévient pas : elle lâche pendant l'orage.",
