@@ -28,14 +28,21 @@ ADS_CONV_APPEL = "AW-18410008662/SkTQCPmc3OccENbgycpE"   # « Appel depuis le si
 
 # Mentions légales : tant que le SIRET n'est pas fourni, on n'affirme rien de faux.
 # Dès qu'il l'envoie : SIRET = "812 345 678 00019" et le pied de page se complète seul.
-SIRET = ""
-ASSUREUR_DECENNALE = ""     # ex. "AXA, contrat n° 1234567"
+# Entité légale réelle (registre INSEE, SIREN 983547373) : entreprise
+# individuelle DAVID REINHARD, nom commercial ETS R.DAVID. « JRD Habitat » est
+# le nom commercial utilisé en communication. Le SIRET ...00016 fourni au départ
+# est un établissement FERMÉ ; ...00032 est le siège actif depuis le 19/03/2025.
+RAISON_SOCIALE = "David Reinhard (ETS R.DAVID)"
+SIRET = "983 547 373 00032"
+SIEGE = "91 rue de la République, 33400 Talence"
+ASSUREUR_DECENNALE = ""     # ⚠️ manquant : ex. "AXA, contrat n° 1234567"
 
 
 def mentions_legales():
-    bouts = ["JRD Habitat, entreprise familiale"]
-    if SIRET:
-        bouts.append("SIRET " + SIRET)
+    """Identification de l'annonceur : Google Ads l'exige sur le bâtiment, et
+    la loi l'impose. On n'affiche que ce qui est vérifiable au registre."""
+    bouts = ["JRD Habitat est le nom commercial de " + RAISON_SOCIALE,
+             "SIRET " + SIRET, "Siège : " + SIEGE]
     if ASSUREUR_DECENNALE:
         bouts.append("Garantie décennale : " + ASSUREUR_DECENNALE)
     return " · ".join(bouts)
@@ -108,7 +115,7 @@ ZONES = {
         "ZONE_H2": "Bayonne, Biarritz et <em>tout le Pays Basque.</em>",
         "ZONE_SECTION_LEAD": "Nous intervenons sur la côte comme dans l'intérieur du Pays Basque, ainsi que dans le sud des Landes, de Hendaye à Capbreton.",
         "FOOTER_GEO": "Bayonne, Anglet, Biarritz et tout le Pays Basque (64)",
-        "TRUST_LOCAL_B": "Présents au Pays Basque",
+        "TRUST_LOCAL_B": "Nous intervenons au Pays Basque",
         "TRUST_LOCAL_S": "Déplacement rapide, 64 et sud des Landes",
         "WHY_LEAD": {
             "demoussage-toiture": "Au Pays Basque, l'air marin, la pluie généreuse et la douceur du climat font pousser mousses et lichens toute l'année. Laissés en place, ils travaillent la toiture de l'intérieur.",
@@ -174,8 +181,8 @@ ZONES = {
         "ZONE_H2": "Bergerac, le Bergeracois et <em>toute la Dordogne.</em>",
         "ZONE_SECTION_LEAD": "Nous intervenons dans toute la Dordogne, du Périgord blanc au Périgord noir, de Périgueux à Sarlat et de Bergerac à Brantôme.",
         "FOOTER_GEO": "Bergerac, Sainte-Foy-la-Grande, Périgueux et toute la Dordogne (24)",
-        "TRUST_LOCAL_B": "Installés en Dordogne",
-        "TRUST_LOCAL_S": "Basés dans le Bergeracois, on couvre le 24",
+        "TRUST_LOCAL_B": "Nous intervenons en Dordogne",
+        "TRUST_LOCAL_S": "Bergerac, Sainte-Foy et tout le 24",
         "WHY_LEAD": {
             "demoussage-toiture": "En Dordogne, l'humidité des vallées de l'Isle, de la Vézère et de la Dordogne, les brouillards d'automne et l'ombre des chênes font prospérer mousses et lichens sur les toitures. Laissés en place, ils travaillent la couverture de l'intérieur.",
             "couverture-renovation": "Tuile plate, tuile canal, toits pentus du Périgord : les toitures de Dordogne sont belles mais exigeantes. Entre gel d'hiver, orages d'été et humidité des vallées, une couverture fatiguée ne prévient pas : elle lâche pendant l'orage.",
