@@ -5,23 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>JRD Habitat · Couvreur en Dordogne : toiture, façade, élagage</title>
 <meta name="description" content="Entreprise familiale de couverture installée à Gardonne (24). Démoussage et hydrofuge de toiture, réparation et rénovation, peinture et ravalement, élagage. Devis gratuit sous 24 h." />
-<link rel="canonical" href="https://jrdhabitat.fr/" />
+<link rel="canonical" href="{{URL_BASE}}/" />
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <meta name="theme-color" content="#F5F2EB" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="JRD Habitat · Couvreur en Dordogne" />
 <meta property="og:description" content="Entreprise familiale de couverture à Gardonne (24). Toiture, façade, élagage. Devis gratuit sous 24 h." />
-<meta property="og:url" content="https://jrdhabitat.fr/" />
+<meta property="og:url" content="{{URL_BASE}}/" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" />
 <link rel="stylesheet" href="assets/styles.css?v=11" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"RoofingContractor","name":"JRD Habitat",
-"url":"https://jrdhabitat.fr/","telephone":"+33698297995","image":"https://jrdhabitat.fr/assets/img/nettoyage-toiture-action.jpg",
+"url":"{{URL_BASE}}/","telephone":"{{PHONE_TEL}}","image":"{{URL_BASE}}/assets/img/nettoyage-toiture-action.jpg",
 "address":{"@type":"PostalAddress","streetAddress":"Route de Sigoulès","addressLocality":"Gardonne","postalCode":"24680","addressRegion":"Nouvelle-Aquitaine","addressCountry":"FR"},
 "areaServed":[{"@type":"City","name":"Bergerac"},{"@type":"City","name":"Sainte-Foy-la-Grande"},{"@type":"City","name":"Lalinde"},{"@type":"City","name":"Périgueux"},{"@type":"AdministrativeArea","name":"Dordogne"}],
-"description":"Entreprise familiale de couverture : démoussage et hydrofuge de toiture, réparation et rénovation, peinture et ravalement de façade, élagage.","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"3"}}
+"description":"Entreprise familiale de couverture : démoussage et hydrofuge de toiture, réparation et rénovation, peinture et ravalement de façade, élagage."{{SCHEMA_RATING}}}
 </script>
 <style>
   .home-hero{padding:56px 0 40px}
@@ -64,7 +64,7 @@
     </a>
     <div class="topbar-cta">
       <span class="topbar-note">Devis gratuit sous 24 h</span>
-      <a href="tel:+33698297995" class="btn btn-ink btn-sm js-tel">06 98 29 79 95</a>
+      <a href="tel:{{PHONE_TEL}}" class="btn btn-ink btn-sm js-tel">{{PHONE_DISPLAY}}</a>
     </div>
   </div>
 </header>
@@ -78,7 +78,7 @@
         peinture et ravalement, élagage. On se déplace, on regarde, on chiffre.
         Le devis est gratuit et le prix annoncé ne bouge plus.</p>
       <div class="home-acts">
-        <a href="tel:+33698297995" class="btn btn-accent js-tel">Appeler le 06 98 29 79 95</a>
+        <a href="tel:{{PHONE_TEL}}" class="btn btn-accent js-tel">Appeler le {{PHONE_DISPLAY}}</a>
         <a href="dordogne/demoussage-toiture/#devis" class="btn btn-ghost">Demander un devis</a>
       </div>
     </div>
@@ -128,26 +128,24 @@
     <div>
       <h2>Nous joindre</h2>
       <ul class="ident">
-        <li><b>Téléphone</b> <a href="tel:+33698297995" class="js-tel">06 98 29 79 95</a></li>
+        <li><b>Téléphone</b> <a href="tel:{{PHONE_TEL}}" class="js-tel">{{PHONE_DISPLAY}}</a></li>
         <li><b>Adresse</b> <span>Route de Sigoulès, 24680 Gardonne</span></li>
         <li><b>Zone</b> <span>Bergeracois et toute la Dordogne</span></li>
         <li><b>Devis</b> <span>Gratuit, sous 24 h, sans engagement</span></li>
       </ul>
       <div class="home-acts">
-        <a href="tel:+33698297995" class="btn btn-accent js-tel">Appeler maintenant</a>
+        <a href="tel:{{PHONE_TEL}}" class="btn btn-accent js-tel">Appeler maintenant</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="reviews" id="avis">
+<section class="reviews" id="avis"{{AVIS_HIDDEN}}>
   <div class="wrap">
     <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(24px,3.2vw,32px);margin:0 0 22px">
       Ce que disent nos clients</h2>
     <div class="review-grid">
-      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Intervention de très bonne qualité : réfection complète d'une toiture. Travail fini et soigné. Le nettoyage des abords a été parfaitement réalisé.</blockquote><figcaption>Jacky P. · avril 2022</figcaption></figure>
-      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Entreprise professionnelle très sérieuse, de qualité, que je recommande.</blockquote><figcaption>Laëtitia A. · janvier 2021</figcaption></figure>
-      <figure class="review"><div class="stars" aria-label="5 étoiles sur 5">★★★★★</div><blockquote>Professionnel, travail très soigné.</blockquote><figcaption>Kigan R. · février 2021</figcaption></figure>
+      {{AVIS_CARTES}}
     </div>
   </div>
 </section>
@@ -165,8 +163,8 @@
          <a href="dordogne/elagage/">élagage</a></p>
     </div>
     <div class="footer-legal">
-      <span>Route de Sigoulès, 24680 Gardonne · 06 98 29 79 95</span>
-      <span>JRD Habitat, entreprise familiale</span>
+      <span>Route de Sigoulès, 24680 Gardonne · {{PHONE_DISPLAY}}</span>
+      <span>{{MENTIONS_LEGALES}}</span>
       <span>© <span id="year">2026</span> JRD Habitat</span>
     </div>
   </div>

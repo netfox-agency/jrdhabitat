@@ -20,11 +20,26 @@ ROOT = pathlib.Path(__file__).parent
 # ⚠️ PLACEHOLDERS : remplacer ici puis relancer le build (une seule fois pour les 8 pages).
 PHONE_DISPLAY = "06 98 29 79 95"      # numéro réel JRD Habitat, fourni le 2026-09-03
 PHONE_TEL = "+33698297995"
-URL_BASE = "https://jrd-habitat.fr"       # proposition de domaine, à valider/acheter
+URL_BASE = "https://jrdhabitat.fr"        # domaine réel, en ligne
 # Conversions du compte JRD Habitat 365-004-7844 (créées le 2026-08-25)
 ADS_GTAG = "AW-18410008662"
 ADS_CONV_DEVIS = "AW-18410008662/MyGrCPOc3OccENbgycpE"   # « Demande de devis (site) » 200 €
 ADS_CONV_APPEL = "AW-18410008662/SkTQCPmc3OccENbgycpE"   # « Appel depuis le site » 100 €
+
+# Mentions légales : tant que le SIRET n'est pas fourni, on n'affirme rien de faux.
+# Dès qu'il l'envoie : SIRET = "812 345 678 00019" et le pied de page se complète seul.
+SIRET = ""
+ASSUREUR_DECENNALE = ""     # ex. "AXA, contrat n° 1234567"
+
+
+def mentions_legales():
+    bouts = ["JRD Habitat, entreprise familiale"]
+    if SIRET:
+        bouts.append("SIRET " + SIRET)
+    if ASSUREUR_DECENNALE:
+        bouts.append("Garantie décennale : " + ASSUREUR_DECENNALE)
+    return " · ".join(bouts)
+
 
 SERVICES = [
     "demoussage-toiture",
@@ -240,6 +255,7 @@ CONSTANTS = {
     "ADS_GTAG": ADS_GTAG,
     "ADS_CONV_DEVIS": ADS_CONV_DEVIS,
     "ADS_CONV_APPEL": ADS_CONV_APPEL,
+    "MENTIONS_LEGALES": mentions_legales(),
 }
 
 
@@ -262,6 +278,11 @@ def render(template_text, zone_slug, zone, service):
     return out
 
 
+def tpl_tokens_accueil():
+    """Jetons propres à l'accueil (il n'appartient à aucune zone)."""
+    return {}
+
+
 def main():
     count = 0
     for service in SERVICES:
@@ -273,6 +294,23 @@ def main():
             dest.write_text(html, encoding="utf-8")
             count += 1
             print("  %s" % dest.relative_to(ROOT))
+    # Page d'accueil : c'est elle que voient les gens qui tapent le domaine
+    # ou qui cherchent « JRD Habitat » avant d'appeler. Elle ne doit jamais
+    # rester un index technique.
+    tpl = (ROOT / "templates" / "accueil.html").read_text(encoding="utf-8")
+    tokens = dict(CONSTANTS)
+    tokens.update(bloc_avis())
+    for k, v in tpl_tokens_accueil().items():
+        tokens[k] = v
+    out = tpl
+    for k, v in tokens.items():
+        out = out.replace("{{%s}}" % k, v)
+    leftover = sorted(set(re.findall(r"\{\{([A-Z0-9_]+)\}\}", out)))
+    if leftover:
+        sys.exit("Jetons non résolus dans l'accueil : %s" % ", ".join(leftover))
+    (ROOT / "index.html").write_text(out, encoding="utf-8")
+    count += 1
+    print("  index.html")
     print("%d pages générées." % count)
 
 
