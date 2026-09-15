@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" />
-<link rel="stylesheet" href="assets/styles.css?v=11" />
+<link rel="stylesheet" href="assets/styles.css?v=12" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"RoofingContractor","name":"JRD Habitat",
 "url":"https://jrdhabitat.fr/","telephone":"+33698297995","image":"https://jrdhabitat.fr/assets/img/nettoyage-toiture-action.jpg",
@@ -33,12 +33,21 @@
   .home-hero-img img{display:block;width:100%;height:auto}
   .home-acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
   .svc{padding:12px 0 60px}
-  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
-  .svc-card{background:var(--card,#fff);border-radius:var(--r-md);padding:22px 20px;box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;transition:box-shadow .18s,transform .18s}
-  .svc-card:hover{box-shadow:inset 0 0 0 1px rgba(47,96,69,.35),0 10px 28px rgba(27,42,33,.12);transform:translateY(-2px)}
-  .svc-card b{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:18.5px}
-  .svc-card span{color:var(--ink-60);font-size:14.5px;line-height:1.5}
-  .svc-card i{font-style:normal;color:var(--accent);font-weight:700;font-size:14px;margin-top:auto}
+  .svc-lead{display:grid;grid-template-columns:1.35fr 1fr;gap:38px;margin-top:26px;align-items:start}
+  .svc-hero{display:block;text-decoration:none;color:inherit}
+  .svc-hero img{display:block;width:100%;height:auto;border-radius:var(--r-md);box-shadow:0 14px 38px rgba(27,42,33,.16)}
+  .svc-hero b{display:block;font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:22px;margin:18px 0 0}
+  .svc-hero p{color:var(--ink-80);line-height:1.6;margin:9px 0 0}
+  .svc-hero i{font-style:normal;color:var(--accent);font-weight:700;font-size:15px;display:inline-block;margin-top:12px}
+  .svc-hero:hover i{text-decoration:underline}
+  /* Filets plutôt que cadres : les trois autres services se lisent comme une
+     liste, pas comme trois boîtes identiques de plus. */
+  .svc-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+  .svc-list li{border-bottom:1px solid var(--line)}
+  .svc-list a{display:block;padding:18px 2px;text-decoration:none;color:inherit;transition:padding-left .16s}
+  .svc-list a:hover{padding-left:8px}
+  .svc-list b{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:18px;display:block}
+  .svc-list span{color:var(--ink-60);font-size:14.5px;line-height:1.5;display:block;margin-top:4px}
   .home-band{background:var(--paper-2);padding:52px 0}
   .home-band h2{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(24px,3.2vw,32px);margin:0 0 10px}
   .home-band h2 em{font-style:italic;font-weight:500;color:var(--gold)}
@@ -49,9 +58,8 @@
   .ident b{min-width:112px;color:var(--ink)}
   @media (max-width:900px){
     .home-hero-in,.home-two{grid-template-columns:1fr;gap:28px}
-    .svc-grid{grid-template-columns:1fr 1fr}
+    .svc-lead{grid-template-columns:1fr;gap:26px}
   }
-  @media (max-width:560px){ .svc-grid{grid-template-columns:1fr} }
 </style>
 </head>
 <body id="top" data-lp="accueil">
@@ -93,23 +101,29 @@
   <div class="wrap">
     <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(24px,3.2vw,32px);margin:0">
       Ce que nous faisons</h2>
-    <div class="svc-grid">
-      <a class="svc-card" href="dordogne/demoussage-toiture/">
-        <b>Démoussage de toiture</b>
-        <span>Nettoyage, traitement anti-mousse et hydrofuge qui retarde la repousse.</span>
-        <i>Voir la page →</i></a>
-      <a class="svc-card" href="dordogne/couverture-renovation/">
-        <b>Couverture et réparation</b>
-        <span>Fuite, tuiles cassées, faîtage, rénovation complète de couverture.</span>
-        <i>Voir la page →</i></a>
-      <a class="svc-card" href="dordogne/peinture-ravalement/">
-        <b>Peinture et ravalement</b>
-        <span>Façades, boiseries, volets et murets, en intérieur comme en extérieur.</span>
-        <i>Voir la page →</i></a>
-      <a class="svc-card" href="dordogne/elagage/">
-        <b>Élagage et abattage</b>
-        <span>Taille, élagage et abattage, y compris les arbres proches du toit.</span>
-        <i>Voir la page →</i></a>
+    <div class="svc-lead">
+      <a class="svc-hero" href="dordogne/demoussage-toiture/">
+        <img src="assets/img/mousse-tuiles-toiture.jpg" width="1280" height="960"
+             alt="Mousses et lichens sur des tuiles" loading="lazy" />
+        <div>
+          <b>Démoussage et hydrofuge de toiture</b>
+          <p>Mousses, lichens, tuiles qui noircissent. On nettoie sans haute pression,
+             on traite, puis l'hydrofuge retarde la repousse pour plusieurs années.
+             Photos avant et après en fin de chantier.</p>
+          <i>Voir le détail et demander un devis →</i>
+        </div>
+      </a>
+      <ul class="svc-list">
+        <li><a href="dordogne/couverture-renovation/">
+          <b>Couverture et réparation</b>
+          <span>Fuite, tuiles cassées, faîtage, rénovation complète.</span></a></li>
+        <li><a href="dordogne/peinture-ravalement/">
+          <b>Peinture et ravalement</b>
+          <span>Façades, boiseries, volets et murets, dedans comme dehors.</span></a></li>
+        <li><a href="dordogne/elagage/">
+          <b>Élagage et abattage</b>
+          <span>Taille et abattage, y compris les arbres qui touchent le toit.</span></a></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -117,7 +131,7 @@
 <section class="home-band">
   <div class="wrap home-two">
     <div>
-      <h2>Une entreprise familiale, <em>installée en Dordogne.</em></h2>
+      <h2>Une entreprise familiale, <em>qui se déplace chez vous.</em></h2>
       <p>JRD Habitat intervient sur le Bergeracois et l'ensemble du département :
         Bergerac, Gardonne, Sainte-Foy-la-Grande, Lalinde, Eymet, Issigeac,
         Périgueux et les communes alentour.</p>
@@ -172,6 +186,6 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=11"></script>
+<script src="assets/script.js?v=12"></script>
 </body>
 </html>
