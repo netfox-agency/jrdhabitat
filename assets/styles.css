@@ -510,3 +510,25 @@ body.has-cookiebar .callbar{bottom:calc(12px + var(--consent-h,84px))}
   .cookiebar .cookiebar-acts{flex:1 1 100%}
   .cookiebar button{flex:1}
 }
+
+/* ---------- Corrections d'audit (320 px, cibles tactiles, lisibilité) ----------
+   1. Débordement à 320 px : un élément de grille a `min-width:auto` par défaut,
+      il ne peut donc pas devenir plus étroit que son contenu le plus large.
+      Sur un iPhone SE, le hero poussait la page 11 px trop loin.
+   2. Cibles tactiles : la case de consentement faisait 18 px de haut.
+      On agrandit la zone cliquable sans grossir la case elle-même.
+   3. Lisibilité : plus rien sous 12 px sur mobile. */
+.hero-grid > *, .split > *, .home-hero-in > *, .home-two > *,
+.svc-lead > *, .steps > *, .review-grid > *, .footer-in > *,
+.final-in > *, .final-contacts > * { min-width: 0; }
+h1, h2, .hero-sub, .hero-loc { overflow-wrap: break-word; }
+
+@media (max-width: 560px){
+  .consent{ padding: 11px 0; align-items: center; }
+  .consent input{ flex: 0 0 auto; }
+  .pc-pill{ font-size: 12px; }
+  .badge{ font-size: 12px; }
+  .footer-legal, .footer-in .l, .brand .bd, .eyebrow,
+  .final-contacts .l, .fc .l{ font-size: 12px; }
+  .footer-in a{ display: inline-block; padding: 5px 0; }
+}

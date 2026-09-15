@@ -250,8 +250,12 @@ def bloc_avis():
 
 
 def bloc_prix(service):
+    """Deux cartes affichant « Sur devis » n'apprennent rien au visiteur et
+    coûtent un demi-écran sur mobile. Tant que les fourchettes ne sont pas
+    validées par l'artisan, on masque les cartes et on garde l'explication."""
     a, b = PRIX.get(service, ("", ""))
-    return {"PRIX_A": a or "Sur devis", "PRIX_B": b or "Sur devis"}
+    return {"PRIX_A": a or "Sur devis", "PRIX_B": b or "Sur devis",
+            "PRIX_HIDDEN": "" if (a or b) else " hidden"}
 
 # ---------------------------------------------------------------- build
 
