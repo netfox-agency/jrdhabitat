@@ -519,16 +519,27 @@ body.has-cookiebar .callbar{bottom:calc(12px + var(--consent-h,84px))}
       On agrandit la zone cliquable sans grossir la case elle-même.
    3. Lisibilité : plus rien sous 12 px sur mobile. */
 .hero-grid > *, .split > *, .home-hero-in > *, .home-two > *,
-.svc-lead > *, .steps > *, .review-grid > *, .footer-in > *,
+.svc-lead > *, .steps > *, .reviews > *, .footer-in > *,
 .final-in > *, .final-contacts > * { min-width: 0; }
 h1, h2, .hero-sub, .hero-loc { overflow-wrap: break-word; }
+
+/* Plancher de lisibilité : 12 px partout, pas seulement sur mobile.
+   On descendait à 10,5 px sur les pastilles et 11 px sur les badges. */
+.pc-pill, .badge, .eyebrow, .brand .bd,
+.footer-legal, .footer-in .l, .final-contacts .l, .fc .l{ font-size: 12px; }
 
 @media (max-width: 560px){
   .consent{ padding: 11px 0; align-items: center; }
   .consent input{ flex: 0 0 auto; }
-  .pc-pill{ font-size: 12px; }
-  .badge{ font-size: 12px; }
-  .footer-legal, .footer-in .l, .brand .bd, .eyebrow,
-  .final-contacts .l, .fc .l{ font-size: 12px; }
-  .footer-in a{ display: inline-block; padding: 5px 0; }
+  .footer-in p{ line-height: 2.1; }   /* respiration pour viser les liens au doigt */
 }
+
+/* ---------- Cibles tactiles (audit /qa) ----------
+   Mesurées sous 44 px : le téléphone de l'en-tête sur l'accueil (24 px),
+   les liens de pied de page (32 px) et le bouton « Devis gratuit » (39 px).
+   Sur un métier où l'appel est le premier canal, un numéro de 24 px de haut
+   se rate au doigt. On agrandit la zone sans changer l'apparence. */
+.topbar-cta .btn-sm{ min-height: 44px; display: inline-flex; align-items: center; }
+.footer-in p a{ display: inline; padding: 3px 1px; }   /* liens en ligne : on ne casse pas la phrase */
+.footer-in > div > a{ display: inline-flex; align-items: center; min-height: 44px; }
+.btn-sm{ min-height: 44px; }

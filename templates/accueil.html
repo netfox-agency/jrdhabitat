@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" />
-<link rel="stylesheet" href="assets/styles.css?v=15" />
+<link rel="stylesheet" href="assets/styles.css?v=20" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"RoofingContractor","name":"JRD Habitat",
 "url":"{{URL_BASE}}/","telephone":"{{PHONE_TEL}}","image":"{{URL_BASE}}/assets/img/nettoyage-toiture-action.jpg",
@@ -33,7 +33,7 @@
   .home-hero-img img{display:block;width:100%;height:auto}
   .home-acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
   .svc{padding:12px 0 60px}
-  .svc-lead{display:grid;grid-template-columns:1.35fr 1fr;gap:38px;margin-top:26px;align-items:start}
+  .svc-lead{display:grid;grid-template-columns:1.35fr 1fr;gap:38px;margin-top:26px;align-items:stretch}
   .svc-hero{display:block;text-decoration:none;color:inherit}
   .svc-hero img{display:block;width:100%;height:auto;border-radius:var(--r-md);box-shadow:0 14px 38px rgba(27,42,33,.16)}
   .svc-hero b{display:block;font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:22px;margin:18px 0 0}
@@ -42,9 +42,10 @@
   .svc-hero:hover i{text-decoration:underline}
   /* Filets plutôt que cadres : les trois autres services se lisent comme une
      liste, pas comme trois boîtes identiques de plus. */
-  .svc-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-  .svc-list li{border-bottom:1px solid var(--line)}
-  .svc-list a{display:block;padding:18px 2px;text-decoration:none;color:inherit;transition:padding-left .16s}
+  .svc-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--line);
+            display:flex;flex-direction:column;justify-content:space-between}
+  .svc-list li{border-bottom:1px solid var(--line);flex:1;display:flex;align-items:center}
+  .svc-list a{display:block;width:100%;padding:18px 2px;text-decoration:none;color:inherit;transition:padding-left .16s}
   .svc-list a:hover{padding-left:8px}
   .svc-list b{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:18px;display:block}
   .svc-list span{color:var(--ink-60);font-size:14.5px;line-height:1.5;display:block;margin-top:4px}
@@ -54,7 +55,8 @@
   .home-two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
   .home-two p{color:var(--ink-80);line-height:1.65;margin:10px 0 0}
   .ident{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:9px}
-  .ident li{display:flex;gap:10px;color:var(--ink-80);font-size:15px}
+  .ident li{display:flex;gap:10px;color:var(--ink-80);font-size:15px;align-items:center;min-height:44px}
+  .ident a{display:inline-flex;align-items:center;min-height:44px}
   .ident b{min-width:112px;color:var(--ink)}
   @media (max-width:900px){
     .home-hero-in,.home-two{grid-template-columns:1fr;gap:28px}
@@ -154,13 +156,14 @@
   </div>
 </section>
 
-<section class="reviews" id="avis"{{AVIS_HIDDEN}}>
+<section class="section" id="avis"{{AVIS_HIDDEN}}>
   <div class="wrap">
-    <h2 style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(24px,3.2vw,32px);margin:0 0 22px">
-      Ce que disent nos clients</h2>
-    <div class="review-grid">
-      {{AVIS_CARTES}}
+    <div class="sec-head">
+      <span class="eyebrow">Ils nous ont fait confiance</span>
+      <h2 class="h2">Ce que disent <em>nos clients.</em></h2>
     </div>
+    <div class="reviews">
+      {{AVIS_CARTES}}</div>
   </div>
 </section>
 
