@@ -543,3 +543,24 @@ h1, h2, .hero-sub, .hero-loc { overflow-wrap: break-word; }
 .footer-in p a{ display: inline; padding: 3px 1px; }   /* liens en ligne : on ne casse pas la phrase */
 .footer-in > div > a{ display: inline-flex; align-items: center; min-height: 44px; }
 .btn-sm{ min-height: 44px; }
+
+/* ---------- En-tête mobile : le texte de marque passait sous les boutons ----------
+   Mesuré à 393 px : .brand-txt rendait 22 px de large pour 84 px de contenu,
+   en overflow visible. Le nom débordait sous le bouton téléphone.
+   Cause de fond : la barre du haut portait DEUX boutons (258 px sur 393),
+   alors que la barre fixe du bas propose déjà Appeler et Devis gratuit.
+   On retire le doublon en haut et on rend la marque insécable. */
+@media (max-width: 560px){
+  .topbar-cta .btn-accent{ display: none; }        /* doublon de la barre du bas */
+  .brand{ min-width: 0; flex: 1 1 auto; }
+  .brand-txt{ min-width: 0; overflow: hidden; }
+  .brand-txt b{ white-space: nowrap; }
+  .brand-txt .bd{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  .topbar-cta{ flex: 0 0 auto; }
+}
+/* L'accueil n'a pas de barre d'appel en bas : on y garde les deux boutons,
+   mais on masque le sous-titre de marque pour libérer la place. */
+@media (max-width: 560px){
+  body[data-lp="accueil"] .topbar-cta .btn-accent{ display: inline-flex; }
+  body[data-lp="accueil"] .brand-txt .bd{ display: none; }
+}
