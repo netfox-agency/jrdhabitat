@@ -59,8 +59,11 @@ SERVICES = [
 
 
 def pills(cities, main):
+    """Les landings sont en noindex : une liste de 22 communes n'apporte rien
+    en référencement et noie le lecteur. On affiche les 8 plus proches, le
+    reste est couvert par la phrase de la section."""
     out = []
-    for c in cities:
+    for c in cities[:8]:
         cls = "zone zone-main" if c == main else "zone"
         out.append('<span class="%s">%s</span>' % (cls, c))
     return "\n      ".join(out)
