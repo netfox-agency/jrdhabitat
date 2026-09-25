@@ -169,7 +169,9 @@
   function intention(q) {
     q = sansAccents(q);
     if (/\b(urgence|urgent|fuite|infiltration|depannage|tempete|bachage|danger|mort)\b/.test(q)) return 'urgence';
-    if (/\b(prix|tarif|devis|cout|combien|estimation|budget|m2)\b/.test(q)) return 'prix';
+    /* Embauche avant prix : « devis » veut dire prêt à engager, pas curieux. */
+    if (/\b(entreprise|artisan|societe|société|professionnel|couvreur|pro|devis|pres de moi|près de moi|autour de moi|proche|meilleur)\b/.test(q)) return 'embauche';
+    if (/\b(prix|tarif|cout|combien|estimation|budget|m2)\b/.test(q)) return 'prix';
     if (/\b(hydrofuge|impermeabilisation)\b/.test(q)) return 'hydro';
     if (/\b(gouttiere|goutiere)\b/.test(q)) return 'gouttiere';
     if (/\b(renovation|refection|refaire|changement|remplacement)\b/.test(q)) return 'renovation';
